@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Keplr from './keplr';
+import Keplr from '../keplr/keplr';
 
 function App() {
     const [keplrResponse, setKeplrResponse] = useState();
@@ -38,7 +38,7 @@ function App() {
     return (
         <div className="App">
             <div className="container">
-                {!keplrResponse && <div className="message">Расширение Keplr не установлено для данного браузера</div>}
+                {!keplrResponse && <div className="message">Keplr Wallet not detected, please install extension. Learn more at https://keplr.xyz/</div>}
                 {keplrResponse && <Keplr />}
             </div>
         </div>
