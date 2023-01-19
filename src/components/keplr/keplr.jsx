@@ -19,7 +19,7 @@ const Keplr = () => {
 
 
    window.keplr.getKey(chainId).then(response => {
-           setKeplrName(response.name);
+           setKeplrUser(response.name);
        })
 
 
