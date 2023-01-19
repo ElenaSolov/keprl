@@ -7,20 +7,35 @@ const Keplr = () => {
 
    const [keplrUser, setKeplrUser] = useState("");
 
+// To create a readonly secret.js client, just pass in a gRPC-web endpoint
+const secretjs = new SecretNetworkClient({
+  grpcWebUrl,
+  chainId,
+});
 
-   // Readonly Client
-   const secretjs = SecretNetworkClient.create({
-     grpcWebUrl,
-     chainId,
-   });
+console.log(secretjs);
 
-   // Or a signer client with Keplr integration
-   window.keplr.enable(chainId)
+const getBalanse = async () => {
+const {
+  balance: { amount },
+} = await secretjs.query.bank.balance(
+  {
+    address: "secret1ap26qrlp8mcq2pg6r47w43l0y8zkqm8a450s03",
+    denom: "uscrt",
+  } ,
+);
+return amount;
+}
 
 
-   window.keplr.getKey(chainId).then(response => {
+console.log(`I have ${getBalanse() / 1e6} SCRT!`);
+useEffect(()=> {
+window.keplr.getKey(chainId).then(response => {
            setKeplrUser(response.name);
+           console.log(response)
        })
+}, []);
+
 
 
     return (
